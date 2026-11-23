@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Winterreise Schottland</title>
+<meta name="theme-color" content="#0b5cad">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday travel companion, calm and exact
+   IDEA a travel wallet: route map up top, boarding passes and hostel vouchers below
+   PICTURE stylised map of Britain with the route drawn as flight arcs and rail line
+   COLOUR saltire blue sea band, white paper, ink, thistle red accent for pins and open items
+   TYPE Barlow Condensed (departure board) + Inter
+   LAYOUT laptop: map left, next-leg + checklist right; phone: title, map, next leg, days */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0c1620);--ink:light-dark(#13202b,#e8eef3);--mute:light-dark(#566673,#9fb0bd);--sea:light-dark(#0b5cad,#0a2f52);--land:light-dark(#eef3f6,#1a2a37);--land2:light-dark(#dfe7ec,#243747);--card:light-dark(#f4f7f9,#13212d);--line:light-dark(#d5dee5,#2a3b49);--acc:light-dark(#d7263d,#ff5a6e);--ok:light-dark(#1d7a4a,#5fd39a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3,.big{font-family:"Barlow Condensed","Arial Narrow",sans-serif;letter-spacing:-.01em;line-height:1.05;margin:0}
+.top{background:var(--sea);color:#fff;padding:20px max(5vw,16px) 0}
+.top h1{font-size:clamp(34px,6vw,52px);text-wrap:balance}
+.top p{margin:4px 0 0;opacity:.9}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:start;max-width:1240px;margin:0 auto}
+.map{background:var(--sea);padding:8px 0 0}
+.map svg{width:100%;height:auto;display:block;max-height:78vh}
+.land{fill:var(--land);stroke:color-mix(in srgb,var(--land) 70%,#000);stroke-width:2}
+.arc{fill:none;stroke:#fff;stroke-width:5;stroke-dasharray:2 14;stroke-linecap:round}
+.rail{fill:none;stroke:var(--acc);stroke-width:7;stroke-linecap:round}
+.pin{fill:var(--acc);stroke:#fff;stroke-width:4}
+.pin.ap{fill:#fff;stroke:var(--sea);stroke-width:5}
+.lbl{font:600 30px Inter,sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:8px}
+.lbl.w{fill:#fff;stroke:var(--sea)}
+.lbl small,.sub{font-size:24px;font-weight:500}
+.side{padding:4px 0 24px;color:#fff}
+.next{background:var(--bg);color:var(--ink);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.next .k{font-size:14px;color:var(--mute)}
+.next .big{font-size:clamp(40px,7vw,60px);color:var(--acc)}
+.next .what{font-weight:600;margin-top:4px}
+.stays{display:grid;gap:8px}
+.stay{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;background:rgba(255,255,255,.12);border-radius:12px;padding:10px 14px}
+.stay b{font-family:"Barlow Condensed",sans-serif;font-size:22px;white-space:nowrap}
+.stay span{font-size:15px}
+main{max-width:1240px;margin:0 auto;padding:28px max(5vw,16px) 48px}
+.cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:36px;align-items:start}
+h2{font-size:34px;margin:0 0 14px}
+.day{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+.day.now{background:color-mix(in srgb,var(--acc) 7%,transparent);border-radius:12px;padding-inline:10px}
+.date .big{font-size:40px}
+.date .wd{font-size:14px;color:var(--mute)}
+.ev{margin-bottom:10px}
+.pass{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;position:relative}
+.pass:after{content:"";position:absolute;right:30%;top:10px;bottom:10px;border-right:2px dashed var(--line)}
+.pass .ap{font-family:"Barlow Condensed",sans-serif;font-size:34px;font-weight:700;line-height:1}
+.pass .t{font-size:15px;white-space:nowrap}
+.pass .mid{text-align:center;font-size:13px;color:var(--mute)}
+.pass .mid svg{width:34px;height:20px;display:block;margin:0 auto;fill:var(--acc)}
+.pass .r{text-align:right}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--mute);margin-top:6px}
+.meta strong{color:var(--ink);font-weight:600}
+.stayc{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--sea);border-radius:12px;padding:12px 14px}
+.stayc h3{font-size:24px}
+.stayc p{margin:4px 0 0;font-size:15px}
+.warn{border-left-color:var(--acc)}
+.open{border:2px dashed var(--acc);border-radius:12px;padding:10px 14px;font-size:15px}
+.open b{color:var(--acc)}
+.copy{font:600 14px Inter,sans-serif;background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:4px 10px;min-height:32px;cursor:pointer}
+.copy:focus-visible,.chk input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+a{color:inherit}
+.chk{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.chk label{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--line);cursor:pointer;min-height:44px}
+.chk input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--ok)}
+.chk input:checked+span{text-decoration:line-through;color:var(--mute)}
+.chk small{display:block;color:var(--mute);font-size:13px}
+.count{font-size:15px;color:var(--mute);margin:-8px 0 12px}
+.aside{position:sticky;top:16px}
+.prog{margin-top:4px;border-left:2px solid var(--line);padding-left:12px}
+.act{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:8px 0}
+.at{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:700;white-space:nowrap}
+.ah{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.an{font-weight:600}
+.an a{text-decoration-color:var(--line);text-underline-offset:3px}
+.ad{font-size:15px;color:var(--mute)}
+.pr{font-size:13px;font-weight:600;white-space:nowrap}
+.tag{font-size:13px;font-weight:600;padding:1px 8px;border-radius:99px;color:#fff;background:var(--sea)}
+.tag.mus{background:#7a3e9d}.tag.sight{background:#0b5cad}.tag.walk{background:#2d7d46}.tag.food{background:#b35c00}.tag.night{background:#33415c}.tag.music{background:var(--acc)}.tag.tour{background:#5c6b73}
+.install{margin-top:10px;font-size:14px}
+.foot{font-size:13px;color:var(--mute);margin-top:24px}
+@media(max-width:900px){.hero,.cols{grid-template-columns:minmax(0,1fr)}.aside{position:static}.side{padding-top:0}}
+@media(max-width:600px){.day{grid-template-columns:62px minmax(0,1fr);gap:8px}.date .big{font-size:27px}.pass .ap{font-size:28px}.pass:after{display:none}}
+@media(prefers-reduced-motion:no-preference){.arc{animation:fly 2.4s linear infinite}@keyframes fly{to{stroke-dashoffset:-32}}}
+</style>
+</head>
+<body>
+<header class="top">
+<div class="hero">
+<div>
+<h1>London · Edinburgh · Glasgow</h1>
+<p>24. November – 8. Dezember 2026 · 14 Nächte · 6 Flüge</p>
+<div class="map"><svg id="map" viewBox="0 0 800 1000" role="img" aria-label="Karte der Reiseroute"></svg></div>
+</div>
+<div class="side">
+<div class="next" id="next"></div>
+<div class="stays" id="stays"></div>
+</div>
+</div>
+</header>
+<main>
+<div class="cols">
+<section><h2>Tag für Tag</h2><div id="days"></div></section>
+<aside class="aside"><h2>Noch zu erledigen</h2><p class="count" id="count"></p><ul class="chk" id="todo"></ul>
+<p class="foot">Stand 23.11.2026, aus deinen Buchungsmails. Alle Zeiten Ortszeit (Luxemburg +1 h zu UK). Häkchen bleiben nur in diesem Browser gespeichert.</p></aside>
+</div>
+</main>
+<script>
+{
+const P=(lon,lat)=>[(lon+6.2)*59,(58.9-lat)*100];
+const pts=a=>a.map(([x,y])=>P(x,y).map(v=>v.toFixed(0)).join(',')).join(' ');
+const gb=[[-5.7,50.05],[-4.2,50.35],[-3.4,50.6],[-2,50.7],[-1.1,50.78],[.3,50.77],[1.38,51.15],[.9,51.4],[1.6,51.9],[1.75,52.5],[1.7,52.9],[.35,52.95],[0,53.4],[-.1,53.6],[-.6,54.5],[-1.3,54.9],[-1.6,55.6],[-2,55.8],[-2.6,56],[-3.3,56.05],[-2.6,56.3],[-2.6,56.6],[-2,57.15],[-1.8,57.6],[-3,57.7],[-4,57.6],[-3.4,58.1],[-3.1,58.6],[-5,58.6],[-5.4,58],[-5.7,57.3],[-5.6,56.4],[-5.6,55.3],[-4.9,55.7],[-4.7,55.4],[-5,54.85],[-3.6,54.9],[-3.3,54.4],[-3,53.9],[-3.1,53.3],[-4.6,53.3],[-4.2,52.9],[-4.1,52.4],[-5.2,51.85],[-4.2,51.6],[-3,51.5],[-4.2,51.2],[-5,50.6]];
+const eu=[[1.6,50.95],[2.5,51.1],[3.4,51.35],[4,51.9],[4.6,52.6],[5,53.2],[6.5,53.5],[7.6,53.5],[7.6,48.5],[-.5,48.5],[.1,49.7],[1.5,50.2]];
+const ie=[[-6.2,54.1],[-6.2,55.25],[-6.6,55.25],[-6.6,54.1]];
+const C={LUX:[6.21,49.63],STN:[.24,51.89],LON:[-.1,51.51],EDI:[-3.36,55.95],EDC:[-3.19,55.95],GLA:[-4.25,55.86]};
+const xy=k=>P(...C[k]);
+const arc=(a,b,bend)=>{const[x1,y1]=xy(a),[x2,y2]=xy(b);const mx=(x1+x2)/2,my=(y1+y2)/2,dx=x2-x1,dy=y2-y1;return `<path class="arc" d="M${x1},${y1} Q${mx-dy*bend},${my+dx*bend} ${x2},${y2}"/>`};
+const [ex,ey]=xy('EDC'),[gx,gy]=xy('GLA');
+let s=`<polygon class="land" points="${pts(gb)}"/><polygon class="land" points="${pts(eu)}"/><polygon class="land" points="${pts(ie)}"/>`;
+s+=arc('LUX','STN',.18)+arc('STN','EDI',.12)+arc('EDI','STN',-.12)+arc('STN','LUX',-.18);
+s+=`<path class="rail" d="M${ex},${ey} Q${(ex+gx)/2},${ey-30} ${gx},${gy}"/>`;
+const pin=(k,cls,r)=>{const[x,y]=xy(k);return `<circle class="pin ${cls}" cx="${x}" cy="${y}" r="${r}"/>`};
+s+=pin('LUX','ap',11)+pin('STN','ap',11)+pin('EDI','ap',10)+pin('LON','',14)+pin('EDC','',14)+pin('GLA','',14);
+const L=(k,dx,dy,t,sub,cls='',an)=>{const[x,y]=xy(k);an=an||(dx<0?'end':'start');return `<text class="lbl ${cls}" x="${x+dx}" y="${y+dy}" text-anchor="${an}">${t}<tspan class="sub" x="${x+dx}" dy="28">${sub}</tspan></text>`};
+s+=L('EDC',20,-34,'Edinburgh','26.–30.11. · 5.–7.12.');
+s+=L('GLA',-70,56,'Glasgow','30.11.–5.12.','','start');
+s+=L('LON',-24,40,'London','24.–26.11. · 7.–8.12.');
+s+=L('LUX',-20,-56,'Luxemburg','24.11. · 8.12.','w');
+document.getElementById('map').innerHTML=s;
+
+const legs=[
+{d:'2026-11-24T19:40:00+01:00',a:'2026-11-24T19:55:00Z',fn:'FR1458',fr:'LUX',to:'STN',seat:'18A',ref:'OZS5RV',note:'Gate schließt 19:10'},
+{d:'2026-11-26T18:30:00Z',a:'2026-11-26T19:50:00Z',fn:'RK596',fr:'STN',to:'EDI',seat:'14A',ref:'M4CGRZ',note:'Abgabe Aufgabegepäck 20 kg'},
+{d:'2026-12-07T07:10:00Z',a:'2026-12-07T08:35:00Z',fn:'RK1274',fr:'EDI',to:'STN',seat:'12F',ref:'M4CGRZ',note:'ca. 05:30 am Flughafen sein'},
+{d:'2026-12-08T16:50:00Z',a:'2026-12-08T19:05:00+01:00',fn:'FR1459',fr:'STN',to:'LUX',seat:'19A',ref:'OZS5RV',note:'Ankunft 19:05 Luxemburger Zeit'}];
+const stays=[
+{n:"Wombat's City Hostel",c:'London',in:'2026-11-24',out:'2026-11-26',ref:'WLO-851595',adr:"7 Dock St, London E1 8LL",info:'6-Bett-Social-Dorm · Keycard ab 14:00, Rezeption 24/7 · Welcome Drink gratis · bezahlt £61,10'},
+{n:'Castle Rock Hostel',c:'Edinburgh',in:'2026-11-26',out:'2026-11-30',ref:'6160443551835',adr:'15 Johnston Terrace, Edinburgh EH1 2PW',info:'14-Bett-Dorm · Check-in 15–23 Uhr, Rezeption 24/7 · Schlüsselpfand Ausweis oder £10 bar · Handtuch £2 · Touristensteuer 5 % vor Ort'},
+{n:'Revolver Glasgow',c:'Glasgow',in:'2026-11-30',out:'2026-12-05',ref:'5103549764694',adr:'62 Virginia St, Glasgow G1 1TX',info:'Bett in 6er-Suite · Lichtbildausweis + Kartenautorisierung beim Check-in · über zwei Clubs, also laut · nicht erstattbar'},
+{n:"St Christopher's",c:'Edinburgh',in:'2026-12-05',out:'2026-12-07',ref:'39766',adr:'9-13 Market St, Edinburgh EH1 1DE',info:'18-Bett-Dorm · Check-in ab 15:00, Check-out bis 11:00 · Schloss für Locker mitbringen (sonst £4)',warn:'Buchung aktiv, aber £59,19 am 06.10. erstattet – evtl. Zahlung vor Ort'},
+{n:'Generator London',c:'London',in:'2026-12-07',out:'2026-12-08',ref:'LON0000972092',adr:'37 Tavistock Pl, London WC1H 9SE',info:'Großer Schlafsaal · Frühstück + Late Check-out inklusive · Zahlkarte beim Check-in vorzeigen · bezahlt £18,30'}];
+const opens={'2026-11-30':'Zug Edinburgh → Glasgow noch nicht gebucht (ScotRail, ca. 50 Min)','2026-12-05':'Zug Glasgow → Edinburgh noch nicht gebucht'};
+const G=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+const K={mus:'Museum',sight:'Sehenswert',walk:'Draußen',food:'Essen',night:'Abend',music:'Musik',tour:'Tour'};
+const prog={
+'2026-11-24':[['21:30','night',"Welcome Drink im Wombat's","Gratis zur Social-Dorm-Buchung, gut um Leute kennenzulernen.",'','']],
+'2026-11-25':[
+['09:00','sight','Tower of London','Kronjuwelen, Raben, Beefeater-Führung inklusive. 10 Min zu Fuß vom Wombat\'s. Ab 27.11. Weihnachtsdeko.','£38','https://www.hrp.org.uk/tower-of-london/'],
+['13:00','walk','Tower Bridge → Borough Market','Über die Brücke, am Südufer zum Markt, dort Mittagessen.','','https://boroughmarket.org.uk'],
+['15:00','mus','Tate Modern','Moderne Kunst im alten Kraftwerk, Aussichtsebene mit Blick auf St Paul\'s.','frei','https://www.tate.org.uk/visit/tate-modern'],
+['19:00','night','Pub-Abend Shoreditch / Brick Lane','Kneipen, Streetfood, Live-Musik. 15 Min vom Hostel.','',G('Brick Lane London')]],
+'2026-11-26':[
+['10:00','mus','Natural History Museum','Dino-Halle, Blauwal, Erdbeben-Raum. Alternativ: Camden Market.','frei','https://www.nhm.ac.uk'],
+['15:15','tour','Los nach Stansted','Stansted Express ab Liverpool Street, ca. 50 Min. Mit Aufgabegepäck spätestens 15:30 los.','','']],
+'2026-11-27':[
+['09:30','sight','Edinburgh Castle','Direkt neben dem Castle Rock. Früh rein, online buchen (Zeitfenster). National War Museum inklusive.','ca. £20–24','https://www.edinburghcastle.scot'],
+['13:00','walk','Royal Mile runter','Castle → St Giles\' Cathedral → Holyrood. Closes und Gassen links und rechts.','',G('Royal Mile Edinburgh')],
+['15:00','tour','The Real Mary King\'s Close','Unterirdische Gassen aus dem 17. Jh., 1 Std. geführt. Vorher buchen.','ab £24','https://www.realmarykingsclose.com'],
+['17:00','night','Weihnachtsmarkt Princes Street Gardens','Täglich ca. 10–22 Uhr, Eintritt frei, Riesenrad und Starflyer extra.','frei','https://edinburgh.org/discover/edinburgh-festivals/edinburghs-christmas']],
+'2026-11-28':[
+['10:00','mus','National Museum of Scotland','Dolly das Schaf, Lewis Chessmen, Dachterrasse Level 7 mit Stadtblick. Geschichte satt.','frei','https://www.nms.ac.uk/national-museum-of-scotland'],
+['12:30','sight','Greyfriars Kirkyard & Victoria Street','Friedhof gegenüber vom Museum, danach die bunte Victoria Street runter zum Grassmarket.','',G('Greyfriars Kirkyard')],
+['13:30','walk',"Arthur's Seat",'Vulkanhügel, ca. 1,5 Std. hoch und runter. Sonnenuntergang ca. 15:45 – nicht zu spät los.','',G("Arthur's Seat Edinburgh")],
+['21:00','music',"Sandy Bell's",'Traditionelle Folk-Session fast jeden Abend, kleine Kneipe, Instrumente willkommen.','',G("Sandy Bell's Edinburgh")]],
+'2026-11-29':[
+['10:00','walk','Calton Hill','Bester Blick über die Stadt, 15 Min vom Hostel.','',G('Calton Hill Edinburgh')],
+['12:00','walk','Dean Village & Water of Leith','Postkarten-Dorf mitten in der Stadt, Spaziergang am Fluss Richtung Stockbridge.','',G('Dean Village Edinburgh')],
+['19:00','night','Grassmarket Pub Crawl','The Last Drop, White Hart Inn, Biddy Mulligans – alles am Fuß vom Castle Rock.','',G('Grassmarket Edinburgh')]],
+'2026-11-30':[
+['10:00','sight',"St Andrew's Day",'Schottischer Nationalfeiertag – Events und Ceilidhs in der Stadt, vorher kurz checken.','',''],
+['17:00','night','Merchant City & Weihnachtsmarkt St Enoch','Rund um dein Hotel. Markt laut Vorjahren bis 24.12., Termine 2026 nicht bestätigt.','',G('St Enoch Square Glasgow')]],
+'2026-12-01':[
+['10:00','mus','Kelvingrove Art Gallery and Museum','22 Galerien, Dalís Christus, Mackintosh. Orgelkonzert gratis Mo–Sa 13:00.','frei','https://www.glasgowlife.org.uk/museums/venues/kelvingrove-art-gallery-and-museum'],
+['14:00','mus','Riverside Museum + Glenlee','Transportmuseum von Zaha Hadid, 10 Min zu Fuß. Draußen das Segelschiff Glenlee, ebenfalls frei.','frei','https://glasgowlife.org.uk/museums/venues/riverside-museum'],
+['20:00','music',"King Tut's Wah Wah Hut",'Legendärer kleiner Club, hier wurde Oasis entdeckt. Programm vorab prüfen.','',G("King Tut's Wah Wah Hut")]],
+'2026-12-02':[
+['07:45','tour','Highlands-Tagestour: Loch Lomond, Glencoe, Loch Ness','Ab Buchanan Bus Station, ca. 12 Std. Im Dezember nur ~7 Std. Tageslicht – geführt ist hier einfacher als selbst fahren.','ab ca. £60','https://www.rabbies.com/en-gb/tour/loch-ness-glencoe-the-highlands-day-tour-from-glasgow']],
+'2026-12-03':[
+['10:00','sight','Glasgow Cathedral & Necropolis','Mittelalterliche Kathedrale, dahinter der viktorianische Friedhof auf dem Hügel mit Stadtblick.','frei',G('Glasgow Necropolis')],
+['13:00','mus','Burrell Collection','Museum des Jahres 2023, Rüstungen, Wandteppiche, Degas. Im Pollok Park, Zug bis Pollokshaws West.','frei','https://burrellcollection.com'],
+['21:00','music','The Ben Nevis Bar','Whisky-Bar im West End mit trad Sessions.','',G('Ben Nevis Bar Glasgow')]],
+'2026-12-04':[
+['11:00','walk','West End & Uni Glasgow','Gotische Uni-Kreuzgänge, dann Ashton Lane zum Mittagessen.','',G('University of Glasgow Cloisters')],
+['15:00','tour','Clydeside Distillery','Whisky-Tour mit Tasting am Fluss, neben dem Riverside Museum. Vorher buchen.','',G('Clydeside Distillery Glasgow')],
+['22:00','night','Freitag Nachtleben','Glasgow ist die Musik- und Club-Stadt: Sauchiehall St, Sub Club, Nice N Sleazy.','',G('Sauchiehall Street Glasgow')]],
+'2026-12-05':[
+['17:00','night','Edinburgh Castle Victorian Christmas','Ausgewählte Termine ab 05.12., Living History im Schloss – Termine checken.','',"https://www.edinburghcastle.scot"]],
+'2026-12-06':[
+['11:00','mus','Scotch Whisky Experience','Am Castle, Fässer-Ride und Tasting. Alternativ: Holyrood Palace oder Dynamic Earth.','',G('Scotch Whisky Experience')],
+['20:00','night','Früh schlafen','Abflug morgen 07:10 – Wecker ca. 04:30. Airlink-Bus fährt ab Waverley, Fahrplan für die Uhrzeit prüfen.','','']],
+'2026-12-07':[
+['11:00','mus','British Museum','10 Min vom Generator. Gratis Zeitfenster-Ticket online. Bayeux-Teppich bis 31.12. ausverkauft.','frei','https://www.britishmuseum.org/visit'],
+['15:00','music','Denmark Street','Londons Gitarrenstraße (Tin Pan Alley), Läden zum Stöbern und Probespielen.','',G('Denmark Street London')]],
+'2026-12-08':[
+['10:00','walk','Covent Garden','Nach dem Gratis-Frühstück, Weihnachtsdeko in der Markthalle. Late Check-out nutzen.','',G('Covent Garden London')],
+['14:00','tour','Los nach Stansted','Liverpool Street → Stansted Express. Flug 16:50, Gepäck vorher abgeben.','','']]};
+const progH=k=>(prog[k]||[]).map(([t,c,n,d,p,u])=>`<div class="act"><div class="at">${t}</div><div><div class="ah"><span class="tag ${c}">${K[c]}</span>${p?`<span class="pr">${p}</span>`:''}</div><div class="an">${u?`<a href="${u}">${n}</a>`:n}</div><div class="ad">${d}</div></div></div>`).join('');
+const todos=[
+['ryan','Ryanair-App laden & online einchecken','Bordkarte nur digital · OZS5RV und M4CGRZ'],
+['zug1','Zug 30.11. Edinburgh → Glasgow buchen','ScotRail'],
+['zug2','Zug 05.12. Glasgow → Edinburgh buchen','Check-in St Christopher\'s ab 15:00'],
+['stc','St Christopher\'s: Zahlung 39766 klären','Ticket #447798 oder Online-Check-in'],
+['edi','Transfer zum Flughafen Edinburgh am 07.12. planen','Abflug 07:10 · ca. 05:00 los'],
+['chk','Online-Check-in Wombat\'s, Revolver, Generator','Links in den Buchungsmails'],
+['cash','£10 Bargeld für Schlüsselpfand Castle Rock','oder Ausweis hinterlegen'],
+['lock','Vorhängeschloss einpacken','Locker St Christopher\'s'],
+['card','Visa-Karte der Buchungen mitnehmen','Generator & St Christopher\'s prüfen sie'],
+['tow','Tower of London 25.11. buchen','£38 · hrp.org.uk'],
+['cas','Edinburgh Castle 27.11. buchen','Zeitfenster 09:30 · online günstiger'],
+['mkc','Mary King\'s Close 27.11. buchen','ab £24'],
+['hig','Highlands-Tour 02.12. buchen','Abfahrt 07:45 Buchanan Bus Station'],
+['bm','British Museum 07.12. Gratis-Ticket','britishmuseum.org']];
+const WD=['So','Mo','Di','Mi','Do','Fr','Sa'];
+const tUK=iso=>new Date(iso).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',timeZone:iso.endsWith('Z')?'Europe/London':'Europe/Luxembourg'});
+const dkey=iso=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(iso));
+const plane='<svg viewBox="0 0 24 14"><path d="M23 7 15 5V1h-2v4L2 3 1 5l12 3v3l-3 1v2l4-1 4 1v-2l-3-1V8l8 1z"/></svg>';
+const passH=l=>`<div class="ev"><div class="pass"><div><div class="ap">${l.fr}</div><div class="t">${tUK(l.d)}</div></div><div class="mid">${plane}${l.fn}</div><div class="r"><div class="ap">${l.to}</div><div class="t">${tUK(l.a)}</div></div></div><div class="meta"><span>Sitz <strong>${l.seat}</strong></span><span>Buchung <strong>${l.ref}</strong></span><button class="copy" data-c="${l.ref}">Kopieren</button><span>${l.note}</span></div></div>`;
+const maps=a=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(a);
+const stayH=(x,kind)=>`<div class="ev"><div class="stayc${x.warn?' warn':''}"><h3>${kind} ${x.n}</h3><p>${x.info}</p>${x.warn?`<p><b style="color:var(--acc)">${x.warn}</b></p>`:''}<div class="meta"><span>Nr. <strong>${x.ref}</strong></span><button class="copy" data-c="${x.ref}">Kopieren</button><a href="${maps(x.adr)}">${x.adr}</a></div></div></div>`;
+const fmt=k=>{const d=new Date(k+'T12:00:00Z');return{dd:d.getUTCDate()+'.'+(d.getUTCMonth()+1)+'.',wd:WD[d.getUTCDay()]}};
+const today=dkey(new Date().toISOString());
+let days='';
+for(let t=Date.parse('2026-11-24T12:00:00Z');t<=Date.parse('2026-12-08T12:00:00Z');t+=864e5){
+const k=new Date(t).toISOString().slice(0,10);let ev='';
+stays.forEach(x=>{if(x.out===k)ev+=`<div class="meta" style="margin:0 0 8px">Check-out ${x.n}</div>`});
+legs.filter(l=>dkey(l.d)===k).forEach(l=>{ev+=passH(l)});
+if(opens[k])ev+=`<div class="ev open"><b>Offen:</b> ${opens[k]}</div>`;
+stays.forEach(x=>{if(x.in===k)ev+=stayH(x,'→')});
+const pg=progH(k);if(pg)ev+=`<div class="prog">${pg}</div>`;
+if(!ev){const cur=stays.find(x=>x.in<k&&x.out>k);ev=`<div class="meta" style="margin:0">Freier Tag in ${cur?cur.c:''} · ${cur?cur.n:''}</div>`}
+const f=fmt(k);days+=`<div class="day${k===today?' now':''}" id="d${k}"><div class="date"><div class="big">${f.dd}</div><div class="wd">${f.wd}</div></div><div>${ev}</div></div>`}
+document.getElementById('days').innerHTML=days;
+
+document.getElementById('stays').innerHTML=stays.map(x=>{const a=fmt(x.in).dd,b=fmt(x.out).dd;const n=Math.round((Date.parse(x.out)-Date.parse(x.in))/864e5);return `<div class="stay"><b>${a}–${b}</b><span>${x.c} · ${x.n} · ${n} ${n>1?'Nächte':'Nacht'}</span></div>`}).join('');
+
+const nx=document.getElementById('next');
+const tick=()=>{const now=Date.now();const l=legs.find(x=>Date.parse(x.d)>now);
+if(!l){nx.innerHTML='<div class="k">Reise</div><div class="big">Willkommen zurück</div>';return}
+const ms=Date.parse(l.d)-now,d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);
+const f=fmt(dkey(l.d));
+nx.innerHTML=`<div class="k">Nächster Flug</div><div class="big">${d>0?d+' T '+h+' Std':h+' Std '+m+' Min'}</div><div class="what">${l.fn} ${l.fr} → ${l.to} · ${f.wd} ${f.dd} ${tUK(l.d)}</div><div class="meta"><span>${l.note}</span></div>`};
+tick();const tm=setInterval(tick,30000);
+
+let st={};try{st=JSON.parse(localStorage.getItem('wr26')||'{}')}catch(e){}
+const ul=document.getElementById('todo'),cnt=document.getElementById('count');
+const render=()=>{ul.innerHTML=todos.map(([id,t,s])=>`<li><label><input type="checkbox" id="t-${id}" data-id="${id}"${st[id]?' checked':''}><span>${t}<small>${s}</small></span></label></li>`).join('');
+const done=todos.filter(x=>st[x[0]]).length;cnt.textContent=`${done} von ${todos.length} erledigt`};
+render();
+ul.addEventListener('change',e=>{const id=e.target.dataset.id;if(!id)return;st[id]=e.target.checked;try{localStorage.setItem('wr26',JSON.stringify(st))}catch(x){}const done=todos.filter(x=>st[x[0]]).length;cnt.textContent=`${done} von ${todos.length} erledigt`});
+document.addEventListener('click',async e=>{const b=e.target.closest('.copy');if(!b)return;try{await navigator.clipboard.writeText(b.dataset.c);b.textContent='Kopiert ✓'}catch(x){b.textContent=b.dataset.c}setTimeout(()=>b.textContent='Kopieren',1800)});
+if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname.endsWith('github.io')){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+const cur=document.getElementById('d'+today);if(cur&&today>'2026-11-23')cur.scrollIntoView({block:'start'});
+}
+</script>
+</body>
+</html>
