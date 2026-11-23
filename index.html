@@ -89,7 +89,7 @@ a{color:inherit}
 .ad{font-size:15px;color:var(--mute)}
 .pr{font-size:13px;font-weight:600;white-space:nowrap}
 .tag{font-size:13px;font-weight:600;padding:1px 8px;border-radius:99px;color:#fff;background:var(--sea)}
-.tag.mus{background:#7a3e9d}.tag.sight{background:#0b5cad}.tag.walk{background:#2d7d46}.tag.food{background:#b35c00}.tag.night{background:#33415c}.tag.music{background:var(--acc)}.tag.tour{background:#5c6b73}
+.tag.mus{background:#7a3e9d}.tag.sight{background:#0b5cad}.tag.walk{background:#2d7d46}.tag.food{background:#b35c00}.tag.night{background:#33415c}.tag.music{background:var(--acc)}.tag.tour{background:#5c6b73}.tag.photo{background:#c2185b}.tag.trans{background:#1f2933}
 .install{margin-top:10px;font-size:14px}
 .foot{font-size:13px;color:var(--mute);margin-top:24px}
 @media(max-width:900px){.hero,.cols{grid-template-columns:minmax(0,1fr)}.aside{position:static}.side{padding-top:0}}
@@ -154,59 +154,81 @@ const stays=[
 {n:'Generator London',c:'London',in:'2026-12-07',out:'2026-12-08',ref:'LON0000972092',adr:'37 Tavistock Pl, London WC1H 9SE',info:'Großer Schlafsaal · Frühstück + Late Check-out inklusive · Zahlkarte beim Check-in vorzeigen · bezahlt £18,30'}];
 const opens={'2026-11-30':'Zug Edinburgh → Glasgow noch nicht gebucht (ScotRail, ca. 50 Min)','2026-12-05':'Zug Glasgow → Edinburgh noch nicht gebucht'};
 const G=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
-const K={mus:'Museum',sight:'Sehenswert',walk:'Draußen',food:'Essen',night:'Abend',music:'Musik',tour:'Tour'};
+const K={mus:'Museum',sight:'Sehenswert',walk:'Draußen',food:'Essen',night:'Abend',music:'Musik',tour:'Tour',photo:'Foto',trans:'ÖPNV'};
 const prog={
-'2026-11-24':[['21:30','night',"Welcome Drink im Wombat's","Gratis zur Social-Dorm-Buchung, gut um Leute kennenzulernen.",'','']],
+'2026-11-24':[
+['20:00','trans','Stansted → London (Wombat\'s)','Nach der Passkontrolle: Stansted Express bis Liverpool Street (ca. 47–50 Min, ca. £17–20, alle 15 Min). Dann 20 Min zu Fuß oder Tube 2 Stationen bis Tower Hill. Günstiger: National Express A8 ab £7 bis Whitechapel, ca. 15 Min zu Fuß zum Hostel. Ankunft Hostel realistisch ~22:00.','ca. £17–20','https://www.stanstedexpress.com'],
+['22:00','night',"Wombat's Bar",'Welcome Drink gratis zur Social-Dorm-Buchung – einfachster Weg, am ersten Abend Leute zu treffen.','frei','']],
 '2026-11-25':[
-['09:00','sight','Tower of London','Kronjuwelen, Raben, Beefeater-Führung inklusive. 10 Min zu Fuß vom Wombat\'s. Ab 27.11. Weihnachtsdeko.','£38','https://www.hrp.org.uk/tower-of-london/'],
-['13:00','walk','Tower Bridge → Borough Market','Über die Brücke, am Südufer zum Markt, dort Mittagessen.','','https://boroughmarket.org.uk'],
-['15:00','mus','Tate Modern','Moderne Kunst im alten Kraftwerk, Aussichtsebene mit Blick auf St Paul\'s.','frei','https://www.tate.org.uk/visit/tate-modern'],
-['19:00','night','Pub-Abend Shoreditch / Brick Lane','Kneipen, Streetfood, Live-Musik. 15 Min vom Hostel.','',G('Brick Lane London')]],
+['09:00','sight','Tower of London','Kronjuwelen, Raben, Beefeater-Führung inklusive. 10 Min zu Fuß vom Wombat\'s.','£38','https://www.hrp.org.uk/tower-of-london/'],
+['12:00','photo','St Dunstan in the East','Kirchenruine voller Pflanzen, 5 Min vom Tower – einer der schönsten Fotospots Londons.','frei',G('St Dunstan in the East')],
+['12:30','photo','Tower Bridge von Potters Fields','Bester Blick auf die Brücke vom Südufer, dann am Fluss lang zum Borough Market zum Mittagessen.','',G('Potters Fields Park')],
+['15:00','mus','Tate Modern','Moderne Kunst im alten Kraftwerk, Aussichtsebene auf St Paul\'s.','frei','https://www.tate.org.uk/visit/tate-modern'],
+['16:30','photo','Leadenhall Market','Viktorianische Markthalle (Harry-Potter-Drehort), abends beleuchtet.','frei',G('Leadenhall Market')],
+['20:00','music','The Old Blue Last, Shoreditch','Pub mit Bühne oben, fast jeden Abend Bands. Danach Brick Lane – Bars, Streetfood, junges Publikum. Programm vorab checken.','',G('The Old Blue Last Shoreditch')],
+['22:30','night','Ten Bells, Spitalfields','Uriger viktorianischer Pub (Jack-the-Ripper-Geschichte), voll und gesprächig.','',G('Ten Bells Spitalfields')]],
 '2026-11-26':[
 ['10:00','mus','Natural History Museum','Dino-Halle, Blauwal, Erdbeben-Raum. Alternativ: Camden Market.','frei','https://www.nhm.ac.uk'],
-['15:15','tour','Los nach Stansted','Stansted Express ab Liverpool Street, ca. 50 Min. Mit Aufgabegepäck spätestens 15:30 los.','','']],
+['15:15','trans','London → Stansted','Wombat\'s 15:15 los, Liverpool Street ca. 15:45 Stansted Express, an ~16:35. Flug 18:30 mit Aufgabegepäck – nicht später.','ca. £17–20','https://www.stanstedexpress.com'],
+['20:30','trans','Edinburgh Airport → Castle Rock','Airlink 100 bis Waverley Bridge (rund um die Uhr, ca. 30 Min), dann 10 Min bergauf zum Hostel.','ca. £5–8','https://edinburghairport.com/transport-links/buses-and-coaches/edinburgh-city-bus-links'],
+['21:30','night','Biddy Mulligans, Grassmarket','5 Min vom Castle Rock, Live-Musik fast jeden Abend, Backpacker-Publikum.','',G('Biddy Mulligans Edinburgh')]],
 '2026-11-27':[
-['09:30','sight','Edinburgh Castle','Direkt neben dem Castle Rock. Früh rein, online buchen (Zeitfenster). National War Museum inklusive.','ca. £20–24','https://www.edinburghcastle.scot'],
-['13:00','walk','Royal Mile runter','Castle → St Giles\' Cathedral → Holyrood. Closes und Gassen links und rechts.','',G('Royal Mile Edinburgh')],
+['09:30','sight','Edinburgh Castle','Direkt neben dem Castle Rock. Früh rein, online mit Zeitfenster buchen. National War Museum inklusive.','ca. £20–24','https://www.edinburghcastle.scot'],
+['12:00','photo','The Vennel','Treppe am Grassmarket – der klassische Blick hoch zur Burg.','',G('The Vennel Edinburgh')],
+['13:00','walk','Royal Mile runter','Castle → St Giles\' → Holyrood, unterwegs in die Closes links und rechts schauen.','',G('Royal Mile Edinburgh')],
 ['15:00','tour','The Real Mary King\'s Close','Unterirdische Gassen aus dem 17. Jh., 1 Std. geführt. Vorher buchen.','ab £24','https://www.realmarykingsclose.com'],
-['17:00','night','Weihnachtsmarkt Princes Street Gardens','Täglich ca. 10–22 Uhr, Eintritt frei, Riesenrad und Starflyer extra.','frei','https://edinburgh.org/discover/edinburgh-festivals/edinburghs-christmas']],
+['17:00','night','Weihnachtsmarkt Princes Street Gardens','Täglich ca. 10–22 Uhr, Eintritt frei. Riesenrad und Starflyer kosten extra.','frei','https://edinburgh.org/discover/edinburgh-festivals/edinburghs-christmas'],
+['21:00','music','Whistle Binkies, South Bridge','Live-Bands sieben Abende die Woche, bis 3 Uhr offen – Freitag ideal.','',G('Whistle Binkies Edinburgh')]],
 '2026-11-28':[
-['10:00','mus','National Museum of Scotland','Dolly das Schaf, Lewis Chessmen, Dachterrasse Level 7 mit Stadtblick. Geschichte satt.','frei','https://www.nms.ac.uk/national-museum-of-scotland'],
-['12:30','sight','Greyfriars Kirkyard & Victoria Street','Friedhof gegenüber vom Museum, danach die bunte Victoria Street runter zum Grassmarket.','',G('Greyfriars Kirkyard')],
+['10:00','mus','National Museum of Scotland','Dolly das Schaf, Lewis Chessmen, Dachterrasse Level 7 mit Stadtblick.','frei','https://www.nms.ac.uk/national-museum-of-scotland'],
+['12:30','photo','Victoria Street & Greyfriars','Die bunte, geschwungene Straße – früh oder in der Dämmerung, wenn wenig los ist.','',G('Victoria Street Edinburgh')],
 ['13:30','walk',"Arthur's Seat",'Vulkanhügel, ca. 1,5 Std. hoch und runter. Sonnenuntergang ca. 15:45 – nicht zu spät los.','',G("Arthur's Seat Edinburgh")],
-['21:00','music',"Sandy Bell's",'Traditionelle Folk-Session fast jeden Abend, kleine Kneipe, Instrumente willkommen.','',G("Sandy Bell's Edinburgh")]],
+['21:00','music',"Sandy Bell's",'Folk-Session praktisch jeden Abend, kleiner Laden, Musiker aus der ganzen Stadt. Mit dem Wirt quatschen geht immer.','frei',G("Sandy Bell's Edinburgh")],
+['23:00','music',"Sneaky Pete's",'Winziger Club ums Eck, Bands und DJs bis spät.','',G("Sneaky Pete's Edinburgh")]],
 '2026-11-29':[
-['10:00','walk','Calton Hill','Bester Blick über die Stadt, 15 Min vom Hostel.','',G('Calton Hill Edinburgh')],
-['12:00','walk','Dean Village & Water of Leith','Postkarten-Dorf mitten in der Stadt, Spaziergang am Fluss Richtung Stockbridge.','',G('Dean Village Edinburgh')],
-['19:00','night','Grassmarket Pub Crawl','The Last Drop, White Hart Inn, Biddy Mulligans – alles am Fuß vom Castle Rock.','',G('Grassmarket Edinburgh')]],
+['10:00','photo','Calton Hill','Bester Blick über Altstadt, Castle und Arthur\'s Seat. Ikonisches Foto vom Dugald Stewart Monument.','',G('Calton Hill Edinburgh')],
+['12:00','photo','Circus Lane & Dean Village','Instagram-Gasse in Stockbridge, dann am Water of Leith zum Postkarten-Dorf Dean Village.','',G('Dean Village Edinburgh')],
+['20:00','night','Grassmarket Pub Crawl','The Last Drop, White Hart Inn, Biddy Mulligans – alles am Fuß vom Castle Rock. Im Hostel fragen, ob ein Crawl organisiert wird.','',G('Grassmarket Edinburgh')]],
 '2026-11-30':[
-['10:00','sight',"St Andrew's Day",'Schottischer Nationalfeiertag – Events und Ceilidhs in der Stadt, vorher kurz checken.','',''],
-['17:00','night','Merchant City & Weihnachtsmarkt St Enoch','Rund um dein Hotel. Markt laut Vorjahren bis 24.12., Termine 2026 nicht bestätigt.','',G('St Enoch Square Glasgow')]],
+['10:00','sight',"St Andrew's Day",'Schottischer Nationalfeiertag – Events und Ceilidhs in der Stadt checken.','',''],
+['11:00','trans','Zug Edinburgh → Glasgow','ScotRail ab Waverley nach Queen Street, ca. 50 Min. Noch nicht gebucht. Revolver ist 10 Min zu Fuß von Queen Street.','',''],
+['17:00','night','Merchant City & Weihnachtsmarkt St Enoch','Rund ums Hotel. Markt laut Vorjahren bis 24.12., Termine 2026 nicht bestätigt.','',G('St Enoch Square Glasgow')],
+['20:00','music','Machair Monday','Trad-Session in der Machair Bar ab 20 Uhr, Schwesterbar der Ben Nevis. Passt zum Nationalfeiertag.','frei',G('Machair Bar Glasgow')]],
 '2026-12-01':[
 ['10:00','mus','Kelvingrove Art Gallery and Museum','22 Galerien, Dalís Christus, Mackintosh. Orgelkonzert gratis Mo–Sa 13:00.','frei','https://www.glasgowlife.org.uk/museums/venues/kelvingrove-art-gallery-and-museum'],
-['14:00','mus','Riverside Museum + Glenlee','Transportmuseum von Zaha Hadid, 10 Min zu Fuß. Draußen das Segelschiff Glenlee, ebenfalls frei.','frei','https://glasgowlife.org.uk/museums/venues/riverside-museum'],
-['20:00','music',"King Tut's Wah Wah Hut",'Legendärer kleiner Club, hier wurde Oasis entdeckt. Programm vorab prüfen.','',G("King Tut's Wah Wah Hut")]],
+['14:00','mus','Riverside Museum + Glenlee','Transportmuseum von Zaha Hadid, draußen das Segelschiff Glenlee – beides frei.','frei','https://glasgowlife.org.uk/museums/venues/riverside-museum'],
+['16:00','photo','Uni Glasgow Cloisters','Gotische Kreuzgänge, im Dunkeln beleuchtet – 10 Min vom Kelvingrove.','',G('University of Glasgow Cloisters')],
+['21:00','music','Trad Tuesday im Stravaigin','Trad-Night jeden Dienstag ab 21 Uhr im West End.','frei',G('Stravaigin Glasgow')]],
 '2026-12-02':[
-['07:45','tour','Highlands-Tagestour: Loch Lomond, Glencoe, Loch Ness','Ab Buchanan Bus Station, ca. 12 Std. Im Dezember nur ~7 Std. Tageslicht – geführt ist hier einfacher als selbst fahren.','ab ca. £60','https://www.rabbies.com/en-gb/tour/loch-ness-glencoe-the-highlands-day-tour-from-glasgow']],
+['07:45','tour','Highlands-Tagestour: Loch Lomond, Glencoe, Loch Ness','Ab Buchanan Bus Station, ca. 12 Std. Im Dezember kurzes Tageslicht – geführt einfacher als selbst fahren.','ab ca. £60','https://www.rabbies.com/en-gb/tour/loch-ness-glencoe-the-highlands-day-tour-from-glasgow'],
+['21:00','music','The Ben Nevis Bar','Highland-Whiskybar in Finnieston, Trad-Sessions mittwochs ab 20 Uhr. Nach der Tour perfekt.','frei',G('Ben Nevis Bar Glasgow')]],
 '2026-12-03':[
-['10:00','sight','Glasgow Cathedral & Necropolis','Mittelalterliche Kathedrale, dahinter der viktorianische Friedhof auf dem Hügel mit Stadtblick.','frei',G('Glasgow Necropolis')],
-['13:00','mus','Burrell Collection','Museum des Jahres 2023, Rüstungen, Wandteppiche, Degas. Im Pollok Park, Zug bis Pollokshaws West.','frei','https://burrellcollection.com'],
-['21:00','music','The Ben Nevis Bar','Whisky-Bar im West End mit trad Sessions.','',G('Ben Nevis Bar Glasgow')]],
+['10:00','photo','Glasgow Cathedral & Necropolis','Mittelalterliche Kathedrale, dahinter der viktorianische Hügelfriedhof – Top-Fotospot mit Stadtblick.','frei',G('Glasgow Necropolis')],
+['13:00','mus','Burrell Collection','Museum des Jahres 2023: Rüstungen, Wandteppiche, Degas. Im Pollok Park.','frei','https://burrellcollection.com'],
+['17:00','photo','Mural Trail & Barrowland-Schild','Riesige Wandbilder in der Innenstadt, das Neon-Schild vom Barrowland abends fotografieren.','',G('Glasgow City Centre Mural Trail')],
+['20:00','music','Konzert-Abend','Laut Listings The Pretty Reckless im Barrowland – Tickets und Datum vorab prüfen. Sonst: Howlin\' Wolf, gratis Blues jeden Abend.','',G('Barrowland Ballroom Glasgow')]],
 '2026-12-04':[
-['11:00','walk','West End & Uni Glasgow','Gotische Uni-Kreuzgänge, dann Ashton Lane zum Mittagessen.','',G('University of Glasgow Cloisters')],
-['15:00','tour','Clydeside Distillery','Whisky-Tour mit Tasting am Fluss, neben dem Riverside Museum. Vorher buchen.','',G('Clydeside Distillery Glasgow')],
-['22:00','night','Freitag Nachtleben','Glasgow ist die Musik- und Club-Stadt: Sauchiehall St, Sub Club, Nice N Sleazy.','',G('Sauchiehall Street Glasgow')]],
+['11:00','photo','Ashton Lane & West End','Kopfsteingasse mit Lichterketten – abends noch schöner. Mittagessen dort.','',G('Ashton Lane Glasgow')],
+['15:00','tour','Clydeside Distillery','Whisky-Tour mit Tasting am Fluss. Vorher buchen.','',G('Clydeside Distillery Glasgow')],
+['19:00','music','Barrowland oder King Tut\'s','Laut Listings Highstool Prophets im Barrowland (Einlass 19:00). King Tut\'s: hier wurde Oasis entdeckt – Programm checken.','',G("King Tut's Wah Wah Hut")],
+['23:00','night','Freitagnacht Glasgow','Howlin\' Wolf (bis 3 Uhr, Blues), Sub Club, Sauchiehall Street. Glasgow ist UNESCO City of Music.','',G('Howlin Wolf Glasgow')]],
 '2026-12-05':[
-['17:00','night','Edinburgh Castle Victorian Christmas','Ausgewählte Termine ab 05.12., Living History im Schloss – Termine checken.','',"https://www.edinburghcastle.scot"]],
+['11:00','trans','Zug Glasgow → Edinburgh','Queen Street → Waverley, ca. 50 Min. Noch nicht gebucht. St Christopher\'s ist direkt am Bahnhof, Check-in ab 15:00.','',''],
+['17:00','night','Edinburgh Castle Victorian Christmas','Ausgewählte Termine ab 05.12., Living History im Schloss.','','https://www.edinburghcastle.scot'],
+['21:00','music',"Belushi's + Cowgate",'Hostel-Bar im St Christopher\'s (Rabatt für Gäste), dann Samstagnacht in der Cowgate: The Hive, Cabaret Voltaire.','',G('Cowgate Edinburgh')]],
 '2026-12-06':[
-['11:00','mus','Scotch Whisky Experience','Am Castle, Fässer-Ride und Tasting. Alternativ: Holyrood Palace oder Dynamic Earth.','',G('Scotch Whisky Experience')],
-['20:00','night','Früh schlafen','Abflug morgen 07:10 – Wecker ca. 04:30. Airlink-Bus fährt ab Waverley, Fahrplan für die Uhrzeit prüfen.','','']],
+['11:00','mus','Scotch Whisky Experience','Am Castle, Fass-Ride und Tasting. Alternativ: Holyrood Palace oder Dynamic Earth.','',G('Scotch Whisky Experience')],
+['15:30','photo','Sonnenuntergang Calton Hill','Zweiter Versuch, falls am 29.11. Wolken waren.','',G('Calton Hill Edinburgh')],
+['19:00','music',"Sandy Bell's (früh)",'Session startet meist abends – 1–2 Pints und dann ab ins Bett.','',G("Sandy Bell's Edinburgh")]],
 '2026-12-07':[
+['05:00','trans','St Christopher\'s → Edinburgh Airport','Airlink 100 ab Waverley Bridge (5 Min zu Fuß), fährt rund um die Uhr, morgens alle 10 Min, ca. 25–30 Min. Wecker 04:30.','ca. £5–8','https://edinburghairport.com/transport-links/buses-and-coaches/edinburgh-city-bus-links'],
+['09:00','trans','Stansted → Generator','Stansted Express bis Tottenham Hale (ca. 35 Min), Victoria Line bis King\'s Cross, 10 Min zu Fuß. Günstiger: A8-Bus direkt bis King\'s Cross ab £7, im Berufsverkehr aber langsamer.','ca. £20',''],
 ['11:00','mus','British Museum','10 Min vom Generator. Gratis Zeitfenster-Ticket online. Bayeux-Teppich bis 31.12. ausverkauft.','frei','https://www.britishmuseum.org/visit'],
-['15:00','music','Denmark Street','Londons Gitarrenstraße (Tin Pan Alley), Läden zum Stöbern und Probespielen.','',G('Denmark Street London')]],
+['15:00','music','Denmark Street','Londons Gitarrenstraße (Tin Pan Alley) – Läden zum Stöbern und Probespielen.','',G('Denmark Street London')],
+['20:00','music','The Water Rats, King\'s Cross','Kleine Kultbühne, 5 Min vom Generator, Indie-Gigs. Alternativ: Generator-Bar.','',G('The Water Rats Kings Cross')]],
 '2026-12-08':[
-['10:00','walk','Covent Garden','Nach dem Gratis-Frühstück, Weihnachtsdeko in der Markthalle. Late Check-out nutzen.','',G('Covent Garden London')],
-['14:00','tour','Los nach Stansted','Liverpool Street → Stansted Express. Flug 16:50, Gepäck vorher abgeben.','','']]};
+['10:00','photo','Covent Garden & Neal\'s Yard','Nach dem Gratis-Frühstück: Weihnachtsdeko in der Markthalle, bunter Innenhof Neal\'s Yard. Late Check-out nutzen.','',G("Neal's Yard London")],
+['14:00','trans','Generator → Stansted','Victoria Line King\'s Cross → Tottenham Hale, dann Stansted Express (ca. 35 Min). Spätestens 14:00 los, Flug 16:50.','ca. £20','https://www.stanstedexpress.com']]};
 const progH=k=>(prog[k]||[]).map(([t,c,n,d,p,u])=>`<div class="act"><div class="at">${t}</div><div><div class="ah"><span class="tag ${c}">${K[c]}</span>${p?`<span class="pr">${p}</span>`:''}</div><div class="an">${u?`<a href="${u}">${n}</a>`:n}</div><div class="ad">${d}</div></div></div>`).join('');
 const todos=[
 ['ryan','Ryanair-App laden & online einchecken','Bordkarte nur digital · OZS5RV und M4CGRZ'],
